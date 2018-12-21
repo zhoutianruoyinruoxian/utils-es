@@ -1,11 +1,7 @@
-import common from './common';
-import math from './math';
-import type from './type';
 
-const utils = {
-  ...common,
-  ...math,
-  ...type,
-};
+export { default as urlParse } from './common/urlParse';
 
-export default utils;
+
+export { default as toLocaleString } from './math/toLocaleString';
+
+export { default as regUrl } from './regExp/regUrl';
