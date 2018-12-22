@@ -12,9 +12,13 @@ function urlParse(location, {
   let query = null;
   if (type === '[object Location]') {
     query = location.search.slice(1);
-  } else if (type === '[object String]' && ~location.indexOf('?')) {
+  } else if (type === '[object String]') {
     const index = location.indexOf('?');
-    query = location.slice(index + 1);
+    if (~index) {
+      query = location.slice(index + 1);
+    } else {
+      return {};
+    }
   } else {
     return null;
   }

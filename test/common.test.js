@@ -1,4 +1,6 @@
-import { urlParse } from '../src';
+import {
+  urlParse
+} from '../src';
 import chai from 'chai';
 const assert = chai.assert;
 
@@ -17,20 +19,42 @@ describe('工具common', function () {
       assert.isObject(result, 'result should be object');
     });
     it('test url', function () {
-      const demo = 'https://www.chaijs.com/api/assert/#method_assert?number=123name=demozn=中文';
+      const demo = 'https://www.chaijs.com/api/assert/#method_assert?number=123&name=demo&zn=%E5%91%A8%E5%A4%A9';
+      const result = urlParse(demo, {
+        toNumber: true
+      });
+      console.log(result);
+      assert.isObject(result, 'result should be object');
+    });
+    it('test url number', function () {
+      const demo = 'https://www.chaijs.com/api/assert/#method_assert?number=123&name=demo&zn=%E5%91%A8%E5%A4%A9';
+      const result = urlParse(demo, {
+        transform: true
+      });
+      console.log(result);
+      assert.isObject(result, 'result should be object');
+    });
+    it('test url 3', function () {
+      const demo = 'https://www.chaijs.com/api/assert?fff';
       const result = urlParse(demo);
       console.log(result);
-      assert.isObject(result, 'result should be object');
+      assert.isObject(result, 'result should be {}');
     });
-    it('test url number', function () {
-      const demo = 'https://www.chaijs.com/api/assert/#method_assert?number=123name=demozn=中文';
-      const result = urlParse(demo, {});
+    it('test url {}', function () {
+      const demo = 'https://www.chaijs.com/api/assert/';
+      const result = urlParse(demo);
       console.log(result);
-      assert.isObject(result, 'result should be object');
+      assert.isObject(result, 'result should be {}');
     });
-    it('test url number', function () {
+    it('test url {}', function () {
+      const demo = 'demo';
+      const result = urlParse(demo);
+      console.log(result);
+      assert.isObject(result, 'result should be {}');
+    });
+    it('test url null', function () {
       const demo = null;
-      const result = urlParse(demo, {});
+      const result = urlParse(demo);
       console.log(result);
       assert.isNull(result, 'result should be null');
     });
