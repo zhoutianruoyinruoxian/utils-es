@@ -23,13 +23,19 @@ module.exports = {
     //     loose,
     //   }
     // ],
+    // [
+    //   "comments",
+    //   {
+    //     remove: "block",
+    //   }
+    // ],
     [
       "@babel/plugin-transform-runtime",
       {
-        "corejs": false,
-        "helpers": true,
-        "regenerator": true,
-        "useESModules": false,
+        corejs: false,
+        helpers: true,
+        regenerator: true,
+        useESModules: false,
       }
     ]
   ]

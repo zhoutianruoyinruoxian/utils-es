@@ -2,6 +2,7 @@
  * @desc 将url的查询参数转为对象
  * @param {object|string} location|url location对象或者url字符串
  * @param {boolean} toNumber 是否把参数转为数字类型(例：'1' => 1),无法转为数字的不动（默认值false）
+ * @param {boolean} transform 是否对参数进行转义（默认值false）
  */
 
 function urlParse(location, {
@@ -20,16 +21,18 @@ function urlParse(location, {
       return {};
     }
   } else {
-    return null;
+    return location;
   }
   let params = {};
   if (!query) return params;
   let paramsList = [];
   paramsList = query.split('&');
   paramsList.forEach(item => {
-    let [key, value] = item.split('=');
+    const paramsMap = item.split('=');
+    if (paramsMap.length < 2) return;
+    let [key, value] = paramsMap;
+    transform && (value = decodeURIComponent(value));
     toNumber && !isNaN(Number(value)) && !isNaN(parseInt(value)) && (value = parseInt(value));
-    transform && decodeURIComponent(value);
     params[key] = value;
   });
   return params;
